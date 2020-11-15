@@ -52,7 +52,9 @@ autoSSHCopy(){
     echo -e "\033[32m正在配置各节点SSH互信免密登录..........\033[0m"
     if [ ! -e /root/.ssh/id_rsa ];then
         echo "公钥文件不存在"
-        ssh-keygen -t rsa -P '' -f /root/.ssh/id_rsa
+        #ssh-keygen -t rsa -P '' -f /root/.ssh/id_rsa
+	#第一次不需要再次输入yes 直接生成key
+        ssh-keygen -t rsa -P '' -f /root/.ssh/id_rsa -q
     fi
     for i in ${nodeCount[*]};do ssh-copy-id $i;done
 }
