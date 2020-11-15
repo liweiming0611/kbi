@@ -473,6 +473,9 @@ for i in ${MasterIP[*]};do
     ssh $i mkdir -p /etc/kubernetes/pki/admin /root/.kube/ &>/dev/null
     scp /etc/kubernetes/pki/admin/admin* $i:/etc/kubernetes/pki/admin/
     scp /etc/kubernetes/pki/admin/admin.conf $i:/root/.kube/config
+    #kubectl命令自动补全
+    source <(kubectl completion bash)
+    echo "source <(kubectl completion bash)" >> ~/.bashrc
     echo -e "\033[32m${i} kubectl配置完成\033[0m"
 done
 }
